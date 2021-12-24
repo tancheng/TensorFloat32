@@ -13,6 +13,7 @@ The advantage of TF32 is that the format is the same as FP32. When computing inn
 TF32 Tensor Cores operate on FP32 inputs and produce results in FP32 with no code change required. Non-matrix operations continue to use FP32. This provides an easy path to accelerate FP32 input/output data in DL frameworks and HPC.
 
 *Range:* ~1.18e-38 … ~3.40e38 with 4 significant decimal digits precision.
+
 *Usage:*
  - The big advantage of TF32 is that compiler support is required only at the deepest levels, i.e. inside the CUDA compiler. The rest of code just sees FP32 with less precision, but the same dynamic range. Exploiting TF32 will largely be a matter of tweaking callers of libraries to indicate whether TF32 is okay. TF32 exists as something that can be quickly plugged in to exploit Tensor Core speed without much work.
  - Formats such as FP16 and BFLOAT16 require more work, since they involve different bit layouts. It is worth putting in efforts into using these formats, since they reduce memory bandwidth and consequently permit even faster execution.
